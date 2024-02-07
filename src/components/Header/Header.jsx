@@ -1,9 +1,9 @@
-import {useRef,useEffect}from 'react'
+import {useRef,useEffect, useContext}from 'react'
 import logo from "../../assets/Images/Neuron1.png"
 import userImg from "../../assets/Images/userImg.png"
 import {NavLink, Link} from "react-router-dom"
 import {BiMenu} from "react-icons/bi"
-
+import { authContext } from '../../context/AuthContext'
 
 
 const navLinks=[
@@ -31,6 +31,7 @@ const Header = () => {
 
 const headerRef=useRef(null)
 const menuRef=useRef(null)
+const{user,role,token}=useContext(authContext)
 
 const handleStickyHeader=()=>{
   window.addEventListener('scroll',()=>{
@@ -80,20 +81,29 @@ const toggleMenu=()=> menuRef.current.classList.toggle('show_menu')
       </div>
 
       <div className='flex items-center gap-4'>
-        <div className='hidden'>
+        
+         { token && user? (
+         
+         <div>
+        
+        
           <Link to='/'>
             <figure className='w-[35px] h-[35px] rounded-full cursor-pointer'>
               <img src={userImg} className='w-full rounded-full' alt=''/>
             </figure>
             </Link> 
         </div>
+
+         ):(
+
+          
       <Link to='/login'>
         <button className='btn bg-primaryColor py-2 px-6  text-white font-[600] h-[44px] 
         flex items-center rounder-[50px]'>
           Login
         </button>
       </Link>
-
+       )}
       <span className='md:hidden' onClick={toggleMenu}>
         <BiMenu className='w-6 h-6 cursor-pointer'/>
       </span>
