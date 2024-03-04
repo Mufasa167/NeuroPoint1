@@ -9,3 +9,4 @@ Currently, two official plugins are available:
 # FinalProject
 # Clinic-FrontEnd
 # Clinic_front
+# Clinic_front
